@@ -10,11 +10,6 @@ env:
 
 permissions: {}
 
-# cancel the in-progress run upon a repush
-concurrency:
-  group: ${{ github.workflow }}-${{ github.ref }}
-  cancel-in-progress: true
-
 jobs:
   read-toolchain:
     uses: ./.github/workflows/read-toolchain.yaml
