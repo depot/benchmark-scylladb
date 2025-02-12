@@ -31,6 +31,8 @@ jobs:
           echo ${{ needs.read-toolchain.image }}
       - uses: actions/checkout@v4
         with:
+          repository: scylladb/scylladb
+          ref: master
           submodules: true
       - run: |
           sudo dnf -y install clang-tools-extra
