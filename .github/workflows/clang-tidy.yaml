@@ -124,6 +124,6 @@ jobs:
           echo "::add-matcher::.github/clang-matcher.json"
       - name: Build with clang-tidy enabled
         run: |
-          cmake -j 4 --build $BUILD_DIR --target scylla
+          cmake --build $BUILD_DIR --target scylla -j 4
       - run: |
           echo "::remove-matcher owner=clang::"
