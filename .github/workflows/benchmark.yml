@@ -16,7 +16,7 @@ jobs:
   read-toolchain:
     uses: ./.github/workflows/read-toolchain.yaml
   benchmark-gha:
-    name: Run clang-tidy GHA
+    name: Benchmark GHA
     needs:
       - read-toolchain
     runs-on: ubuntu-latest
@@ -54,7 +54,7 @@ jobs:
       - run: |
           echo "::remove-matcher owner=clang::"
   benchmark-depot:
-    name: Run clang-tidy Depot (4 CPUs)
+    name: Benchmark Depot
     needs:
       - read-toolchain
     runs-on: depot-ubuntu-latest-4
