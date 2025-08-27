@@ -13,19 +13,21 @@ env:
 permissions: {}
 
 jobs:
-  read-toolchain:
-    uses: ./.github/workflows/read-toolchain.yaml
+  read-toolchain-gha:
+    uses: ./.github/workflows/read-toolchain-gha.yml
+  read-toolchain-depot:
+    uses: ./.github/workflows/read-toolchain-depot.yml
   benchmark-gha:
     name: Benchmark GHA
     needs:
-      - read-toolchain
+      - read-toolchain-gha
     runs-on: ubuntu-latest
-    container: ${{ needs.read-toolchain.outputs.image }}
+    container: ${{ needs.read-toolchain-gha.outputs.image }}
     steps:
       - env:
-          IMAGE: ${{ needs.read-toolchain.image }}
+          IMAGE: ${{ needs.read-toolchain-gha.image }}
         run: |
-          echo ${{ needs.read-toolchain.image }}
+          echo ${{ needs.read-toolchain-gha.image }}
       - uses: actions/checkout@v4
         with:
           repository: scylladb/scylladb
@@ -56,14 +58,14 @@ jobs:
   benchmark-depot:
     name: Benchmark Depot
     needs:
-      - read-toolchain
+      - read-toolchain-depot
     runs-on: depot-ubuntu-latest-4
-    container: ${{ needs.read-toolchain.outputs.image }}
+    container: ${{ needs.read-toolchain-depot.outputs.image }}
     steps:
       - env:
-          IMAGE: ${{ needs.read-toolchain.image }}
+          IMAGE: ${{ needs.read-toolchain-depot.image }}
         run: |
-          echo ${{ needs.read-toolchain.image }}
+          echo ${{ needs.read-toolchain-depot.image }}
       - uses: actions/checkout@v4
         with:
           repository: scylladb/scylladb
